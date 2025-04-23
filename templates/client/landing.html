@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Echosoul – {% trans "Leave your echo" %}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="min-h-screen flex flex-col justify-center items-center text-center bg-zinc-950 px-6">
+    <h1 class="text-4xl md:text-5xl font-semibold text-indigo-300 leading-snug">
+        {% trans "Leave your echo" %}<br>
+        {% trans "in time and silence" %}
+    </h1>
+    <p class="mt-4 text-gray-300 max-w-md text-lg">
+        {% trans "Send a voice or text message into the future. Anonymous, emotional, timeless." %}
+    </p>
+    <div class="flex flex-col md:flex-row gap-4 mt-8">
+        <a href="#" class="inline-block bg-indigo-700 hover:bg-indigo-600 text-white text-lg font-medium py-3 px-6 rounded-xl transition">
+            <i class="fas fa-feather-pointed mr-2"></i> {% trans "Start your Echo" %}
+        </a>
+        <a href="#release" class="inline-block text-indigo-300 border border-indigo-600 hover:bg-indigo-800 text-lg font-medium py-3 px-6 rounded-xl transition">
+            <i class="fas fa-circle-info mr-2"></i> {% trans "See how it works" %}
+        </a>
+    </div>
+</section>
+
+<!-- ¿Qué es Echosoul? -->
+<section class="bg-zinc-900 py-16 px-6 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-200">{% trans "What is Echosoul?" %}</h2>
+    <p class="mt-4 text-gray-300 max-w-xl mx-auto text-lg leading-relaxed">
+        {% trans "Echosoul is a sacred space where emotions are freed into time. Write or record anonymous messages — to yourself, to someone you love, or to the world — and release them into the future." %}
+    </p>
+    <div class="mt-8 flex justify-center">
+        <i class="fas fa-wave-square text-indigo-400 text-5xl opacity-70"></i>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="bg-zinc-950 py-20 px-6 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-200 mb-12">{% trans "How does it work?" %}</h2>
+    <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto text-gray-300">
+        <div>
+            <i class="fas fa-pen-nib text-indigo-300 text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold">{% trans "1. Create" %}</h3>
+            <p class="mt-2">{% trans "Write or record a message in your language of choice." %}</p>
+        </div>
+        <div>
+            <i class="fas fa-calendar-alt text-indigo-300 text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold">{% trans "2. Schedule" %}</h3>
+            <p class="mt-2">{% trans "Choose when it will be revealed — to you, someone else, or the world." %}</p>
+        </div>
+        <div>
+            <i class="fas fa-unlock text-indigo-300 text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold">{% trans "3. Release" %}</h3>
+            <p class="mt-2">{% trans "Let go. Your echo will wait silently… until the right time comes." %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- How Echoes Are Released -->
+<section id="release" class="bg-zinc-900 py-20 px-6 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-200 mb-6">{% trans "How Echoes Are Released" %}</h2>
+    <p class="text-gray-300 max-w-2xl mx-auto mb-12 text-lg leading-relaxed">
+        {% trans "When you create an Echo, you choose how it will be released: only for yourself, sent to someone specific, or made public for the world to feel." %}
+    </p>
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto text-left text-gray-300">
+        <div class="bg-zinc-800 rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <i class="fas fa-user-clock text-indigo-400 text-2xl"></i>
+                <h3 class="text-xl font-semibold text-indigo-300">{% trans "To Yourself" %}</h3>
+            </div>
+            <p>{% trans "Like a time capsule. Set a date in the future, and your Echo will return to you in silence, when you are ready." %}</p>
+        </div>
+        <div class="bg-zinc-800 rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <i class="fas fa-paper-plane text-indigo-400 text-2xl"></i>
+                <h3 class="text-xl font-semibold text-indigo-300">{% trans "To Someone Else" %}</h3>
+            </div>
+            <p>{% trans "You can send the Echo to someone via email, SMS, or a private link. It will arrive exactly when you want it to." %}</p>
+        </div>
+        <div class="bg-zinc-800 rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-3">
+                <i class="fas fa-globe text-indigo-400 text-2xl"></i>
+                <h3 class="text-xl font-semibold text-indigo-300">{% trans "To the World" %}</h3>
+            </div>
+            <p>{% trans "Make your Echo public and anonymous. It will float in the EchoSphere, ready to be heard by strangers who might feel the same." %}</p>
+        </div>
+    </div>
+</section>
+
+<!-- Anonymous by Design -->
+<section id="privacy" class="bg-zinc-950 py-20 px-6 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-200 mb-6">{% trans "Anonymous by Design" %}</h2>
+    <p class="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
+        {% trans "We don't ask for your name, email, or identity. Your Echo is connected only to a random ID and hash generated on your device. No one, not even us, can trace it back to you." %}
+    </p>
+    <div class="mt-8 flex justify-center">
+        <i class="fas fa-user-secret text-indigo-400 text-5xl opacity-60"></i>
+    </div>
+</section>
+
+<!-- CTA Final -->
+<section class="bg-indigo-950 py-20 px-6 text-center">
+    <h2 class="text-3xl font-semibold text-indigo-100">{% trans "Your echo is waiting." %}</h2>
+    <p class="text-indigo-300 mt-4 text-lg">{% trans "Create it now, release it when your soul is ready." %}</p>
+    <a href="#" class="mt-6 inline-block bg-indigo-700 hover:bg-indigo-600 text-white text-lg font-medium py-3 px-6 rounded-xl transition-all duration-300">
+        <i class="fas fa-shooting-star mr-2"></i> {% trans "Begin your journey" %}
+    </a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-zinc-950 py-8 px-6 text-center text-gray-500 text-sm">
+    &copy; {{ now|date:"Y" }} Echosoul. {% trans "All rights reserved." %}
+</footer>
+
+{% endblock %}
