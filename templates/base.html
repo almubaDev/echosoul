@@ -1,4 +1,6 @@
+{% load static %}
 {% load i18n %}
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
@@ -18,8 +20,9 @@
 
     <!-- Header de navegación -->
     <header class="w-full px-4 py-3 flex items-center justify-between bg-zinc-950 border-b border-zinc-800 fixed top-0 left-0 z-50">
-        <a href="{% url 'landing' %}" class="text-indigo-300 font-bold text-xl flex items-center gap-1">
-            <i class="fas fa-moon"></i> Echosoul
+        <a href="{% url 'landing' %}" class="flex items-center gap-2 text-indigo-300 font-bold text-xl">
+            <img src="{% static 'img/logo_echosoul.png' %}" alt="Echosoul Logo" class="h-16 w-auto">
+            <span class="hidden sm:inline">Echosoul</span>
         </a>
         <form action="{% url 'set_language' %}" method="post" class="flex items-center space-x-2">
             {% csrf_token %}

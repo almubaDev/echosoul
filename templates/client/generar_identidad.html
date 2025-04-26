@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Echosoul – {% trans "Generate your Anonymous Identity" %}{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-zinc-950 text-white px-6 py-16 max-w-xl mx-auto flex flex-col justify-start">
+
+    {% if not user_id %}
+    <!-- TÍTULO solo si aún no se ha generado -->
+    <h1 class="text-3xl font-semibold text-indigo-300 text-center mb-10">{% trans "Generate your Anonymous Identity" %}</h1>
+
+    <!-- FORMULARIO -->
+    <form method="post" action="{% url 'generar_identidad' %}" class="space-y-6 transition-all duration-300 ease-in-out">
+        {% csrf_token %}
+        <label class="block text-sm text-gray-400 mb-1" for="secret">{% trans "Enter a secret phrase only you will remember." %}</label>
+        <input type="text" name="secret_phrase" id="secret" required
+               class="w-full bg-zinc-800 text-white p-3 rounded" placeholder="{% trans 'e.g. my dog and 1977' %}">
+
+        <button type="submit"
+                class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded transition">
+            {% trans "Generate ID and Hash" %}
+        </button>
+    </form>
+    {% endif %}
+
+    {% if user_id and user_hash %}
+    <!-- BLOQUE DE IDENTIDAD ACTIVO Y CENTRADO -->
+    <div class="w-full bg-zinc-800 p-6 rounded-lg shadow-lg mt-0">
+        <h2 class="text-xl text-indigo-300 font-semibold mb-2">{% trans "Your Identity" %}</h2>
+        <p class="text-gray-400 text-sm">{% trans "Store this safely. You will not be able to recover it." %}</p>
+
+        <div class="mt-4">
+            <p class="text-sm text-gray-500 mb-1">{% trans "User ID" %}</p>
+            <code class="block bg-zinc-900 p-2 rounded text-xs text-indigo-200">{{ user_id }}</code>
+
+            <p class="text-sm text-gray-500 mt-4 mb-1">{% trans "User Hash" %}</p>
+            <code class="block bg-zinc-900 p-2 rounded text-xs text-indigo-200 break-all">{{ user_hash }}</code>
+        </div>
+
+        {% if secret_phrase %}
+            <p class="text-sm text-gray-400 mt-6">{% trans "Your secret phrase:" %}</p>
+            <code class="block bg-zinc-900 p-2 rounded text-xs text-indigo-200 break-all">{{ secret_phrase }}</code>
+        {% else %}
+            <p class="text-red-500 text-sm mt-6">{% trans "Secret phrase not available. You must retype it manually." %}</p>
+        {% endif %}
+
+        <!-- BOTÓN PDF -->
+        <div class="mt-6">
+            <a href="{% url 'descargar_credenciales' %}?uid={{ user_id }}&hash={{ user_hash }}{% if secret_phrase %}&secret={{ secret_phrase }}{% endif %}" target="_blank"
+               class="block w-full text-center bg-indigo-500 hover:bg-indigo-400 py-3 px-4 rounded text-white font-medium">
+                {% trans "Download Credentials PDF" %}
+            </a>
+        </div>
+
+        <!-- CHECKBOX Y BOTÓN LOGIN -->
+        <div class="mt-6">
+            <label class="inline-flex items-center text-sm">
+                <input type="checkbox" id="confirm_guardado" class="form-checkbox bg-zinc-700 rounded mr-2">
+                {% trans "I have saved my credentials securely." %}
+            </label>
+        </div>
+
+        <div class="mt-4 hidden" id="boton_login">
+            <a href="{% url 'login_anonimo' %}" class="block w-full text-center bg-indigo-700 hover:bg-indigo-600 py-3 px-4 rounded text-white font-medium">
+                {% trans "Go to Login" %}
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const checkbox = document.getElementById('confirm_guardado');
+        const botonLogin = document.getElementById('boton_login');
+        checkbox.addEventListener('change', () => {
+            botonLogin.classList.toggle('hidden', !checkbox.checked);
+        });
+    </script>
+    {% endif %}
+</section>
+{% endblock %}

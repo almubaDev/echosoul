@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Echosoul – {% trans "Access with Credentials" %}{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-zinc-950 text-white px-6 py-10 flex flex-col items-center justify-start">
+
+    <h1 class="text-2xl font-semibold text-indigo-300 mb-6 text-center">{% trans "Access to Echosoul" %}</h1>
+
+    {% if error %}
+        <div class="bg-red-600 text-white p-2 mb-4 rounded">{{ error }}</div>
+    {% endif %}
+
+    <div id="manual-login" class="w-full max-w-md space-y-6 bg-zinc-900 p-6 rounded-lg shadow-lg">
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-sm text-gray-300 mb-1">{% trans "User ID" %}</label>
+                <input type="text" name="user_id" required class="w-full rounded p-2 bg-zinc-800 border border-zinc-700 text-white">
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-sm text-gray-300 mb-1">{% trans "Secret Hash" %}</label>
+                <input type="text" name="user_hash" required class="w-full rounded p-2 bg-zinc-800 border border-zinc-700 text-white">
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded transition">
+                {% trans "Access" %}
+            </button>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-400 mb-2">{% trans "Or scan your QR code from your Identity Card" %}</p>
+            <button id="scan-qr-btn"
+                    class="bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2 px-4 rounded transition">
+                {% trans "Scan QR Code" %}
+            </button>
+        </div>
+
+    </div>
+
+    <div id="qr-login" class="hidden w-full max-w-md mt-6">
+        <video id="qr-video" class="rounded shadow-lg"></video>
+        <button id="cancel-scan"
+                class="mt-4 bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded transition">
+            {% trans "Cancel" %}
+        </button>
+    </div>
+
+</section>
+
+<script>
+    const scanBtn = document.getElementById('scan-qr-btn');
+    const cancelBtn = document.getElementById('cancel-scan');
+    const manualLogin = document.getElementById('manual-login');
+    const qrLogin = document.getElementById('qr-login');
+
+    scanBtn.addEventListener('click', () => {
+        manualLogin.classList.add('hidden');
+        qrLogin.classList.remove('hidden');
+        // Activar lector QR si quieres
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        qrLogin.classList.add('hidden');
+        manualLogin.classList.remove('hidden');
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Echosoul Identity</title>
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: white;
+            font-family: Helvetica, Arial, sans-serif;
+            padding: 2cm;
+            margin: 0;
+            text-align: center;
+        }
+        .logo {
+            width: 80px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #84e6e2;
+            font-size: 24pt;
+            margin-bottom: 40px;
+        }
+        .label {
+            color: #cccccc;
+            font-size: 14pt;
+            margin-bottom: 10px;
+        }
+        .value {
+            background-color: #242444;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 14pt;
+            width: 80%;
+            margin: 0 auto 30px auto;
+            word-wrap: break-word;
+            text-align: left;
+        }
+        .footer {
+            margin-top: 40px;
+            color: #888888;
+            font-size: 10pt;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <img src="{{ logo_url }}" class="logo">
+    <h1>Your Echosoul Identity</h1>
+    
+    <div class="label">User ID:</div>
+    <div class="value">{{ user_id }}</div>
+    
+    <div class="label">User Hash:</div>
+    <div class="value">{{ user_hash }}</div>
+    
+    <div class="label">Secret Phrase:</div>
+    <div class="value">{{ secret_phrase }}</div>
+
+    {% if qr_image %}
+        <div style="text-align: center; margin-top: 30px;">
+            <p style="font-size: 8pt; color: #ccc;">Scan to login instantly:</p>
+            <img src="{{ qr_image }}" style="width: 140px;" />
+        </div>
+    {% endif %}
+    
+    <div class="footer">
+        Keep this PDF safe. It's the only way to access your identity.<br>
+        Echosoul does not store your phrase or identity. No recovery is possible.
+    </div>
+</body>
+</html>
